@@ -28,14 +28,14 @@ Este proyecto es una plataforma web desarrollada en Django que permite a usuario
 ## 📁 Estructura del proyecto
 
 amigurumis/
-├── amigurumis/ # Configuración del proyecto
-├── usuarios/ # Gestión de usuarios (modelo personalizado)
-├── patrones/ # Lógica de subida y visualización de patrones
-├── compras/ # Gestión de compras y relaciones usuario-patrón
-├── templates/ # Plantillas HTML con Tailwind
-├── static/ # Archivos estáticos
-├── media/ # Archivos subidos por los usuarios (imágenes, PDFs)
-└── README.md # Este archivo
+  ├── amigurumis/ # Configuración del proyecto
+  ├── usuarios/ # Gestión de usuarios (modelo personalizado)
+  ├── patrones/ # Lógica de subida y visualización de patrones
+  ├── compras/ # Gestión de compras y relaciones usuario-patrón
+  ├── templates/ # Plantillas HTML con Tailwind
+  ├── static/ # Archivos estáticos
+  ├── media/ # Archivos subidos por los usuarios (imágenes, PDFs)
+  └── README.md # Este archivo
 
 ## 🛠️ En desarrollo / Pendientes
 
