@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Patrones disponibles{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-semibold mb-4">Patrones disponibles</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {% for patron in patrones %}
+    <div class="bg-white shadow p-4 rounded-lg">
+        <h2 class="text-lg font-bold">{{ patron.titulo }}</h2>
+        <img src="{{ patron.imagen.url }}" alt="{{ patron.titulo }}" class="w-full h-48 object-cover rounded mt-2">
+        <p class="text-sm text-gray-600">{{ patron.descripcion|truncatewords:20 }}</p>
+        <p class="text-green-600 font-semibold mt-2">${{ patron.precio }}</p>
+        <a href="#" class="inline-block mt-3 text-blue-500 hover:underline">Ver más</a>
+    </div>
+    {% empty %}
+    <p>No hay patrones disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}

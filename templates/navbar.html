@@ -1,0 +1,12 @@
+<nav class="bg-white shadow p-4 flex justify-between">
+    <a href="/" class="text-xl font-bold">Amigurumis</a>
+    <div>
+        {% if user.is_authenticated %}
+            <span class="mr-4">Hola, {{ user.username }}</span>
+            <a href="{% url 'logout' %}" class="text-blue-600">Salir</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="text-blue-600 mr-4">Entrar</a>
+            <a href="{% url 'signup' %}" class="text-blue-600">Registrarse</a>
+        {% endif %}
+    </div>
+</nav>

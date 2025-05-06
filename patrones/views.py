@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from .models import Patron
 
-# Create your views here.
+def patrones_disponibles_view(request):
+    patrones = Patron.objects.all()  # Más adelante filtraremos por usuario
+    context = {
+        'patrones': patrones
+    }
+    return render(request, 'patrones/patrones_disponibles.html', context)
