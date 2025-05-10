@@ -1,15 +1,71 @@
-<nav class="bg-white shadow p-4 flex justify-between">
-    <a href="/" class="text-xl font-bold">Amigurumis</a>
-    <div>
-        {% if user.is_authenticated %}
-            <span class="mr-4">Hola, {{ user.username }}</span>
-            <form action="{% url 'logout' %}" method="post" class="inline-block">
+{% load static %}
+
+<header class="bg-stone-600">
+    <div class="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <a class="block text-teal-600" href={% url 'patrones_disponibles' %} style="position: absolute; top: 0; left: 0; margin: 16px;">
+            <span class="sr-only">Home</span>
+            <img src="{% static 'usuarios/logo.png' %}" alt="logo" class="h-20 w-auto bg-white p-1 rounded-full">
+        </a>
+        <div class="flex items-center gap-4" style="position: absolute; top: 0; right: 60px; margin: 16px;">
+            {% if user.is_authenticated %}
+            <h1 class="text-2xl font-bold text-stone-900 sm:text-3xl">
+                Hola, {{ user.username }}
+            </h1>
+            <button
+                type="button"
+                class="overflow-hidden rounded-full border border-gray-300 shadow-inner"
+            >
+                <span class="sr-only">Toggle dashboard menu</span>
+                {% if user.photo %}
+                  <img
+                  src="{{ user.photo.url }}"
+                  alt="User Photo"
+                  class="h-10 w-10 object-cover"
+                  />
+                {% else %}
+                <img
+                src="{% static 'usuarios/avatar.webp' %}"
+                alt="Default Avatar"
+                class="h-10 w-10 object-cover"
+                />
+                {% endif %}
+            </button>
+            <form action="{% url "logout" %}" method="post" class="inline-flex items-center justify-center">
                 {% csrf_token %}
-                <a type= "submit" class="text-white bg-red-600 hover:bg-blue-700 font-medium py-2 px-4 rounded mr-4 transition duration-300">Cerrar sesion</a>
+                <button
+                type="submit"
+                class="overflow-hidden rounded-full border border-gray-300 shadow-inner"
+                >
+                    <span class="sr-only">Logout</span>
+                    <img
+                    src="{% static 'usuarios/logout.jpg' %}"
+                    alt=""
+                    class="h-10 w-10 object-cover"
+                    />
+                </button>
             </form>
-        {% else %}
-            <a href="{% url 'login' %}" class="text-white bg-blue-600 hover:bg-blue-700 font-medium py-2 px-4 rounded mr-4 transition duration-300">Entrar</a>
-            <a href="{% url 'register' %}" class="text-white bg-green-600 hover:bg-green-700 font-medium py-2 px-4 rounded transition duration-300">Registrarse</a>
-        {% endif %}
+            <a href="" class="relative overflow-hidden rounded-full border border-gray-300 shadow-inner transition bg-white hover:bg-stone-300" >
+                <span class="sr-only">View shopping cart</span>
+                <img
+                    src="{% static 'usuarios/cart.png' %}"
+                    alt="Shopping Cart"
+                    class="h-10 w-10 object-cover"
+                />
+            </a>
+            {% else %}
+            <a
+                class="block rounded-md bg-stone-800 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-stone-900"
+                href="{% url 'login' %}"
+            >
+                Login
+            </a>
+            <a
+                class="block rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-stone-800 transition hover:text-stone-700/75"
+                href="{% url 'register' %}"
+            >
+                Register
+            </a>
+            {% endif %}
+        </div>
     </div>
-</nav>
+</header>

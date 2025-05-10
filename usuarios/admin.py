@@ -9,11 +9,11 @@ class UsuarioAdmin(UserAdmin):
     search_fields = ('username', 'email')
 
     fieldsets = UserAdmin.fieldsets + (
-        ('Rol de usuario', {'fields': ('es_vendedor',)}),
+        ('Rol de usuario', {'fields': ('es_vendedor','photo')}),
     )
 
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ('Rol de usuario', {'fields': ('es_vendedor',)}),
+        ('Rol de usuario', {'fields': ('es_vendedor','photo')}),
     )
 # Registrar el modelo
 admin.site.register(Usuario, UsuarioAdmin)

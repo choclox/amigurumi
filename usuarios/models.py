@@ -5,6 +5,7 @@ from django.apps import apps  # Importación clave para evitar ciclos
 
 class Usuario(AbstractUser):
     es_vendedor = models.BooleanField(default=False)
+    photo = models.ImageField(upload_to='usuarios/fotos_perfil', blank=True, null=True)
 
     def ha_comprado(self, patron):
         Compra = apps.get_model('compras', 'Compra')

@@ -12,7 +12,6 @@ class Patron(models.Model):
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
-        # Aquí puedes agregar lógica adicional antes de guardar el modelo
         if not self.autor.es_vendedor:
             raise ValueError("El autor debe ser un vendedor para publicar un patrón.")
         super().save(*args, **kwargs)

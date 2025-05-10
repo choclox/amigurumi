@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'compras',
     'usuarios',
     'patrones',
+    'tejidos',
 ]
 
 MIDDLEWARE = [
