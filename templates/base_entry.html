@@ -1,0 +1,30 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Amigurumis{% endblock %}</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    {% include 'navbar.html' %}
+
+    <main>
+        <div class="flex h-screen">
+            <div class="w-1/2 ">
+                <img src="{% static 'usuarios/muñecos.png' %}" alt="capuchino" class="h-full w-full object-cover">
+            </div>
+            <div class="w-1/2 flex items-center justify-center ">
+                <div class="container mx-auto px-4 bg-stone-500">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+
+

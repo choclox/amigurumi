@@ -3,10 +3,13 @@
     <div>
         {% if user.is_authenticated %}
             <span class="mr-4">Hola, {{ user.username }}</span>
-            <a href="{% url 'logout' %}" class="text-blue-600">Salir</a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Cerrar sesión</button>
+            </form>
         {% else %}
             <a href="{% url 'login' %}" class="text-blue-600 mr-4">Entrar</a>
-            <a href="{% url 'signup' %}" class="text-blue-600">Registrarse</a>
+            <a href="{% url 'register' %}" class="text-blue-600">Registrarse</a>
         {% endif %}
     </div>
 </nav>

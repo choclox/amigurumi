@@ -6,4 +6,4 @@ def patrones_disponibles_view(request):
     context = {
         'patrones': patrones
     }
-    return render(request, 'patrones/patrones_disponibles.html', context)
+    return render(request, 'patrones_disponibles.html', context)
