@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('patrones.urls')),
     #path('', include('compras.urls')),
     path('', include('usuarios.urls')),
+    path('', include('tejidos.urls')),
 ]
 
 if settings.DEBUG:

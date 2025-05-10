@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import PatronesListView
 
 urlpatterns = [
-    path('', views.patrones_disponibles_view, name='patrones_disponibles'),
+    path('patrones/', PatronesListView.as_view(), name='patrones_disponibles'),
 ]

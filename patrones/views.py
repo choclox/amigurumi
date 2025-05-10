@@ -1,9 +1,8 @@
 from django.shortcuts import render
+from django.views import generic
 from .models import Patron
 
-def patrones_disponibles_view(request):
-    patrones = Patron.objects.all()  # Más adelante filtraremos por usuario
-    context = {
-        'patrones': patrones
-    }
-    return render(request, 'patrones_disponibles.html', context)
+class PatronesListView(generic.ListView):
+    template_name = "patrones_disponibles.html"
+    model = Patron
+    context_object_name = "patrones"
