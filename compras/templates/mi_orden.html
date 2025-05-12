@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto px-4 py-10">
+  <div class="max-w-3xl mx-auto bg-white shadow-md rounded-lg p-6 border border-gray-200">
+    
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Resumen de tu Orden</h2>
+
+    {% if orden %}
+      <div class="mb-6">
+        <p class="text-sm text-gray-600">Número de Orden: <span class="font-medium text-gray-800">#{{ orden.id }}</span></p>
+        <p class="text-sm text-gray-600">Fecha: <span class="font-medium text-gray-800">{{ orden.fecha_creacion|date:"d M Y" }}</span></p>
+      </div>
+
+      <div class="border-t border-b py-4 mb-6">
+        {% for item in orden.items.all %}
+          {% with producto=item.producto %}
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center gap-4">
+              <img src="{{ producto.imagen.url }}" alt="{{ producto }}" class="w-16 h-16 object-cover rounded border" />
+              <div>
+                <h4 class="text-sm font-semibold text-gray-800">
+                  {{ producto.titulo|default:producto.nombre }}
+                </h4>
+                <p class="text-sm text-gray-500">Cantidad: {{ item.cantidad }}</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-sm text-gray-700 font-medium">
+                ${{ item.producto.precio|floatformat:2 }} x {{ item.cantidad }} = ${{ item.subtotal|floatformat:2 }}
+              </p>
+            </div>
+          </div>
+          {% endwith %}
+        {% empty %}
+          <p class="text-gray-500">No hay productos en esta orden.</p>
+        {% endfor %}
+      </div>
+
+      <div class="flex justify-end text-right mb-4">
+        <div class="w-full max-w-sm space-y-2">
+          <div class="flex justify-between text-lg font-bold text-gray-900 border-t pt-2">
+            <span>Total</span>
+            <span>
+              ${{ orden.get_total|floatformat:2 }}
+            </span>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <p class="text-gray-600">No tienes una orden activa actualmente.</p>
+    {% endif %}
+
+    <div class="flex justify-end gap-4 mt-6">
+      <a href="{% url 'productos' %}" class="inline-block px-5 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded hover:bg-gray-200">Seguir comprando</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

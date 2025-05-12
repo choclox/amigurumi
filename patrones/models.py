@@ -3,7 +3,7 @@ from usuarios.models import Usuario
 
 # Create your models here.
 class Patron(models.Model):
-    titulo = models.CharField(max_length=255)
+    nombre = models.CharField(max_length=255)
     descripcion = models.TextField()
     imagen = models.ImageField(upload_to='patrones/imagenes/')
     archivo = models.FileField(upload_to='patrones/pdfs/')
