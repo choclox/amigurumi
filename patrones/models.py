@@ -7,7 +7,7 @@ class Patron(models.Model):
     descripcion = models.TextField()
     imagen = models.ImageField(upload_to='patrones/imagenes/')
     archivo = models.FileField(upload_to='patrones/pdfs/')
-    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
