@@ -8,7 +8,7 @@ from .views import RegisterView
 from django.urls import reverse_lazy
 
 urlpatterns = [
-    path("login/", LoginView.as_view(next_page=reverse_lazy('patrones_disponibles'),template_name="login.html"), name="login"),
-    path("logout/", LogoutView.as_view(next_page=reverse_lazy('patrones_disponibles')), name="logout"),
+    path("login/", LoginView.as_view(next_page=reverse_lazy('productos'),template_name="login.html"), name="login"),
+    path("logout/", LogoutView.as_view(next_page=reverse_lazy('productos')), name="logout"),
     path("registro/", RegisterView.as_view(), name="register"),
 ] 
