@@ -11,17 +11,21 @@ class Usuario(AbstractUser):
         Compra = apps.get_model('compras', 'Compra')
         return Compra.objects.filter(comprador=self, patron=patron).exists()
 
-    def obtener_patrones_comprados(self):
-        Compra = apps.get_model('compras', 'Compra')
-        return Compra.objects.filter(comprador=self).values_list('patron_id', flat=True)
-
-    def obtener_patrones_subidos(self):
+    def get_productos_subidos(self):
+        Tejido = apps.get_model('tejidos', 'Tejido')
         Patron = apps.get_model('patrones', 'Patron')
-        return Patron.objects.filter(autor=self).values_list('id', flat=True)
+        return dict(
+            tejidos=
+            Tejido.objects.filter(autor=self),
+            patrones=
+            Patron.objects.filter(autor=self)
+        )
+    
+    def get_productos_comprados(self):
+        Orden = apps.get_model('compras', 'Orden')
+        OrdenItem = apps.get_model('compras', 'OrdenItem')
 
-    def obtener_patrones_disponibles(self):
-        Patron = apps.get_model('patrones', 'Patron')
-        ids_comprados = self.obtener_patrones_comprados()
-        ids_subidos = self.obtener_patrones_subidos()
-        return Patron.objects.exclude(id__in=ids_comprados).exclude(id__in=ids_subidos).distinct()
+        ordenes = Orden.objects.filter(user=self, is_active=False)
+        items = OrdenItem.objects.filter(orden__in=ordenes)
 
+        return [item.producto for item in items]
