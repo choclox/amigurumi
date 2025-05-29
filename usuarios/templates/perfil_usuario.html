@@ -2,113 +2,88 @@
 {% load tailwind_filters %}
 
 {% block content %}
-<div
-    class="min-h-screen bg-gradient-to-tr from-stone-200 via-stone-300 to-stone-400 flex items-center justify-center p-4 rounded-3xl">
-    <div class="bg-white shadow-2xl rounded-3xl w-full max-w-3xl p-10 relative flex flex-col items-center">
+<div class="perfil-pantalla">
+    <div class="perfil-contenedor">
 
-        <!-- Imagen del usuario -->
-        <div class="absolute -top-20 left-1/2 transform -translate-x-1/2">
+        <div class="perfil-foto-contenedor">
             {% if usuario.photo %}
-            <img src="{{ usuario.photo.url }}"
-                class="w-36 h-36 rounded-full border-4 border-white shadow-lg object-cover ring-4 ring-stone-300"
-                alt="{{ usuario.username }}">
+            <img src="{{ usuario.photo.url }}" alt="{{ usuario.username }}" class="perfil-foto" />
             {% else %}
-            <div
-                class="w-36 h-36 rounded-full bg-stone-200 flex items-center justify-center text-stone-400 text-3xl border-4 border-white shadow-lg ring-4 ring-stone-200">
+            <div class="perfil-foto-placeholder">
                 <span>Sin Foto</span>
             </div>
             {% endif %}
         </div>
 
-        <!-- Datos del usuario -->
-        <div class="mt-24 text-center">
-            <h1 class="text-3xl font-extrabold text-stone-800 tracking-tight">{{ usuario.username }}</h1>
-            <p class="text-base text-stone-500 mt-1">Miembro desde {{ usuario.date_joined|date:"F Y" }}</p>
+        <div class="perfil-datos">
+            <h1 class="perfil-username">{{ usuario.username }}</h1>
+            <p class="perfil-fecha">Miembro desde {{ usuario.date_joined|date:"F Y" }}</p>
             {% if es_dueño %}
-            <span
-                class="inline-block mt-2 px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-xs font-semibold">Este
-                es tu perfil</span>
+            <span class="perfil-dueño-badge">Este es tu perfil</span>
             {% endif %}
         </div>
 
-        <!-- Estadísticas -->
-        <div class="flex justify-center items-center gap-8 mt-8 w-full">
-            <div class="flex flex-col items-center flex-1">
-                <div class="bg-stone-100 rounded-full w-16 h-16 flex items-center justify-center mb-2 shadow">
-                    <span class="text-2xl font-bold text-stone-600">{{ publicaciones.patrones|length }}</span>
+        <div class="perfil-estadisticas">
+            <div class="perfil-estadistica-item">
+                <div class="perfil-estadistica-circulo">
+                    <span class="perfil-estadistica-numero">{{ publicaciones.patrones|length }}</span>
                 </div>
-                <p class="text-sm text-stone-600 font-medium">Patrones</p>
+                <p class="perfil-estadistica-label">Patrones</p>
             </div>
-            <div class="flex flex-col items-center flex-1">
-                <div class="bg-stone-100 rounded-full w-16 h-16 flex items-center justify-center mb-2 shadow">
-                    <span class="text-2xl font-bold text-stone-600">{{ publicaciones.tejidos|length }}</span>
+            <div class="perfil-estadistica-item">
+                <div class="perfil-estadistica-circulo">
+                    <span class="perfil-estadistica-numero">{{ publicaciones.tejidos|length }}</span>
                 </div>
-                <p class="text-sm text-stone-600 font-medium">Muñecos</p>
+                <p class="perfil-estadistica-label">Muñecos</p>
             </div>
-            <div class="flex flex-col items-center flex-1">
-                <div class="bg-stone-100 rounded-full w-16 h-16 flex items-center justify-center mb-2 shadow">
-                    <span class="text-2xl font-bold text-stone-600">{{ pedidos|length }}</span>
+            <div class="perfil-estadistica-item">
+                <div class="perfil-estadistica-circulo">
+                    <span class="perfil-estadistica-numero">{{ pedidos|length }}</span>
                 </div>
-                <p class="text-sm text-stone-600 font-medium">Pedidos</p>
+                <p class="perfil-estadistica-label">Pedidos</p>
             </div>
         </div>
 
-        <!-- Botones -->
-        <div class="mt-8 flex justify-center gap-6 w-full">
+        <div class="perfil-botones">
             {% if es_dueño %}
-            <a href=""
-                class="bg-stone-500 hover:bg-stone-600 text-white px-6 py-2 rounded-full shadow-lg font-semibold transition">
-                Editar Perfil
-            </a>
+            <a href="" class="perfil-btn-editar">Editar Perfil</a>
             {% else %}
-            <a href=""
-                class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-6 py-2 rounded-full shadow-lg font-semibold transition">
-                Enviar mensaje
-            </a>
+            <a href="" class="perfil-btn-mensaje">Enviar mensaje</a>
             {% endif %}
         </div>
 
-        <!-- Productos subidos -->
-        <div class="mt-12 w-full">
-            <h2 class="text-xl font-bold text-stone-800 mb-6 text-center">Mis Publicaciones</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Patrones -->
+        <div class="perfil-publicaciones">
+            <h2 class="perfil-publicaciones-titulo">Mis Publicaciones</h2>
+            <div class="perfil-publicaciones-grid">
+
                 {% for patron in publicaciones.patrones %}
-                <a href=""
-                    class="flex items-center gap-3 p-5 bg-stone-50 rounded-xl shadow hover:shadow-lg transition border border-stone-100">
-                    <span class="text-2xl">🧶</span>
+                <a href="" class="publicacion-tarjeta">
+                    <span class="publicacion-icono">🧶</span>
                     {% if patron.imagen %}
-                    <img src="{{ patron.imagen.url }}" alt="Foto del patrón"
-                        class="w-14 h-14 rounded-lg object-cover border border-stone-200 shadow" />
+                    <img src="{{ patron.imagen.url }}" alt="Foto del patrón" class="publicacion-imagen" />
                     {% else %}
-                    <div
-                        class="w-14 h-14 rounded-lg bg-gray-200 flex items-center justify-center text-gray-500 border shadow">
-                        Sin Imagen
-                    </div>
+                    <div class="publicacion-placeholder">Sin Imagen</div>
                     {% endif %}
-                    <span class="font-semibold text-stone-700">Patrón #{{ patron.id }}</span>
+                    <span class="publicacion-titulo">Patrón #{{ patron.id }}</span>
                 </a>
                 {% endfor %}
 
-                <!-- Tejidos -->
                 {% for tejido in publicaciones.tejidos %}
-                <a href=""
-                    class="flex items-center gap-3 p-5 bg-stone-50 rounded-xl shadow hover:shadow-lg transition border border-stone-100">
-                    <span class="text-2xl">🐻</span>
+                <a href="" class="publicacion-tarjeta">
+                    <span class="publicacion-icono">🐻</span>
                     {% if tejido.imagen %}
-                    <img src="{{ tejido.imagen.url }}" alt="Foto del tejido"
-                        class="w-14 h-14 rounded-lg object-cover border border-stone-200 shadow" />
+                    <img src="{{ tejido.imagen.url }}" alt="Foto del tejido" class="publicacion-imagen" />
                     {% else %}
-                    <div
-                        class="w-14 h-14 rounded-lg bg-gray-200 flex items-center justify-center text-gray-500 border shadow">
-                        Sin Imagen
-                    </div>
+                    <div class="publicacion-placeholder">Sin Imagen</div>
                     {% endif %}
-                    <span class="font-semibold text-stone-700">Muñeco #{{ tejido.id }}</span>
+                    <span class="publicacion-titulo">Muñeco #{{ tejido.id }}</span>
                 </a>
                 {% endfor %}
+
             </div>
         </div>
+
     </div>
 </div>
+
 {% endblock content %}
